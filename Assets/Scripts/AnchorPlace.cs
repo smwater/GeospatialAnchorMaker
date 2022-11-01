@@ -11,13 +11,11 @@ public class AnchorPlace : MonoBehaviour
     public GameObject Player;
 
     private ARAnchorManager _arAnchorManager;
-    private ARGeospatialAnchor _arGeospatialAnchor;
     private AREarthManager _arEarthManager;
 
     private void Awake()
     {
         _arAnchorManager = GetComponent<ARAnchorManager>();
-        _arGeospatialAnchor = GetComponent<ARGeospatialAnchor>();
 
         GeospatialPose geospatialPose = _arEarthManager.Convert(new Pose(Player.transform.position, Player.transform.rotation));
 
@@ -28,10 +26,7 @@ public class AnchorPlace : MonoBehaviour
 
     private void GeoAnchorPlace(double latitude, double longitude, double altitude, Quaternion eunRotation)
     {
-        if (_arGeospatialAnchor.trackingState == TrackingState.Tracking)
-        {
-            ARGeospatialAnchor anchor = ARAnchorManagerExtensions.AddAnchor(_arAnchorManager, latitude, longitude, altitude, eunRotation);
-            GameObject marker = Instantiate(MarkerPrefab, anchor.transform);
-        }
+        ARGeospatialAnchor anchor = ARAnchorManagerExtensions.AddAnchor(_arAnchorManager, latitude, longitude, altitude, eunRotation);
+        GameObject marker = Instantiate(MarkerPrefab, anchor.transform);
     }
 }
