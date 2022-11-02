@@ -8,33 +8,21 @@ public class AnchorPlace : MonoBehaviour
 {
     public GameObject MarkerPrefab;
     public GameObject Player;
+    public AREarthManager AREarthManager;
 
     private ARAnchorManager _arAnchorManager;
-    private bool _isOk = false;
 
-    private void Awake()
+    public void Create()
     {
-        _arAnchorManager = GetComponent<ARAnchorManager>();
-    }
+        Debug.Log(Player.transform.position);
 
-    private void Update()
-    {
-        AREarthManager arEarthManager = new AREarthManager();
+        GeospatialPose geospatialPose = AREarthManager.Convert(new Pose(Player.transform.position, Player.transform.rotation));
 
-        if (!_isOk)
-        {
-            Debug.Log(Player.transform.position);
+        Debug.Log(geospatialPose);
 
-            GeospatialPose geospatialPose = arEarthManager.Convert(new Pose(Player.transform.position, Player.transform.rotation));
-            
-            Debug.Log(geospatialPose);
-
-            GeoAnchorPlace(37.5398185, 127.1229427, geospatialPose.Altitude, geospatialPose.EunRotation);
-            GeoAnchorPlace(37.5397658, 127.1230607, geospatialPose.Altitude, geospatialPose.EunRotation);
-            GeoAnchorPlace(37.5397393, 127.1231278, geospatialPose.Altitude, geospatialPose.EunRotation);
-
-            _isOk = true;
-        }
+        GeoAnchorPlace(37.5398185, 127.1229427, geospatialPose.Altitude, geospatialPose.EunRotation);
+        GeoAnchorPlace(37.5397658, 127.1230607, geospatialPose.Altitude, geospatialPose.EunRotation);
+        GeoAnchorPlace(37.5397393, 127.1231278, geospatialPose.Altitude, geospatialPose.EunRotation);
     }
 
     private void GeoAnchorPlace(double latitude, double longitude, double altitude, Quaternion eunRotation)
