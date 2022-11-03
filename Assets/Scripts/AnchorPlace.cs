@@ -14,15 +14,12 @@ public class AnchorPlace : MonoBehaviour
 
     public void Create()
     {
-        Debug.Log(Player.transform.position);
+        // 사용자 기기와 유사한 고도
+        //GeospatialPose geospatialPose = AREarthManager.Convert(new Pose(Player.transform.position, Player.transform.rotation));
 
-        GeospatialPose geospatialPose = AREarthManager.Convert(new Pose(Player.transform.position, Player.transform.rotation));
-
-        Debug.Log(geospatialPose);
-
-        GeoAnchorPlace(37.5398185, 127.1229427, geospatialPose.Altitude, geospatialPose.EunRotation);
-        GeoAnchorPlace(37.5397658, 127.1230607, geospatialPose.Altitude, geospatialPose.EunRotation);
-        GeoAnchorPlace(37.5397393, 127.1231278, geospatialPose.Altitude, geospatialPose.EunRotation);
+        //GeoAnchorPlace(37.5398185, 127.1229427, geospatialPose.Altitude, geospatialPose.EunRotation);
+        //GeoAnchorPlace(37.5397658, 127.1230607, geospatialPose.Altitude, geospatialPose.EunRotation);
+        //GeoAnchorPlace(37.5397393, 127.1231278, geospatialPose.Altitude, geospatialPose.EunRotation);
     }
 
     private void GeoAnchorPlace(double latitude, double longitude, double altitude, Quaternion eunRotation)
